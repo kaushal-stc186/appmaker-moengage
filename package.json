@@ -1,0 +1,21 @@
+{
+  "name": "@appmaker-packages/extension-moengage",
+  "version": "0.4.13",
+  "main": "index.js",
+  "peerDependencies": {
+    "react-native-moengage": "12.5.0",
+    "react-native-expo-moengage": "1.1.0",
+    "expo-notifications": "0.31.3"
+  },
+  "expo_plugins": [
+    "@appmaker-packages/extension-moengage/app.plugin.js"
+  ],
+  "expo-config": [
+    "@appmaker-packages/extension-moengage/appmaker.config.ts"
+  ],
+  "buildOverrides": {
+    "moengage": {
+      "includeAndroidXRequiredLibraries": true
+    }
+  }
+}

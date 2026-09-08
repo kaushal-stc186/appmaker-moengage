@@ -1,0 +1,10 @@
+{
+    "type": "extension",
+    "id": "cli8gpge8003rccvco612tb93",
+    "handle": "moengage",
+    "name": "moengage",
+    "package": {
+        "id": "cli8gpmin005gccvcqus8ps8o",
+        "name": "@appmaker-packages/extension-moengage"
+    }
+}
