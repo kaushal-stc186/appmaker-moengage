@@ -7,6 +7,12 @@ const { withDangerousMod, withAndroidManifest } = require('@expo/config-plugins'
 const fs = require('fs');
 const path = require('path');
 
+// MoEngage file-based init: Android supports default | live | test.
+// iOS IsTestEnvironment true forces TEST even for Release/archive builds.
+// Official values: https://moengage.com/docs/developer-guide/react-native-sdk/sdk-integration/react-native/sdk-initialization/file-based-initialization/file-based-initialization
+const MOENGAGE_ANDROID_ENVIRONMENT = 'test';
+const MOENGAGE_IOS_IS_TEST_ENVIRONMENT = true;
+
 /**
  * Extract MoEngage plugin settings from appmakerConfig
  */
@@ -45,7 +51,7 @@ function generateAndroidConfigXML(settings) {
     <bool name="com_moengage_core_file_based_initialisation_enabled">true</bool>
     <string name="com_moengage_core_workspace_id">${appId}</string>
     <integer name="com_moengage_core_data_center">${dataCenter}</integer>
-    <string name="com_moengage_core_environment">default</string>
+    <string name="com_moengage_core_environment">${MOENGAGE_ANDROID_ENVIRONMENT}</string>
     <drawable name="com_moengage_cards_ui_place_holder_image" />
     <drawable name="com_moengage_cards_ui_inbox_empty_image" />
     <string name="com_moengage_cards_ui_date_format">MMM dd</string>
@@ -110,7 +116,7 @@ function generateIOSConfigPlist(settings, bundleId, appGroupId) {
 	<key>DataCenter</key>
 	<integer>${dataCenter}</integer>
 	<key>IsTestEnvironment</key>
-	<string>$(SWIFT_ACTIVE_COMPILATION_CONDITIONS)</string>
+	<${MOENGAGE_IOS_IS_TEST_ENVIRONMENT ? 'true' : 'false'}/>
 	<key>AppGroupName</key>
 	<string>${groupId}</string>
 	<key>KeychainGroupName</key>
