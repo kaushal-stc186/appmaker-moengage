@@ -87,11 +87,14 @@ export function activate({ settings }) {
       }
     }
   });
+  // MoEInitConfig has no TEST/LIVE flag. Workspace env is native XML/plist (`test` on this branch).
+  // initialize() is still required so *_N trackEvent reaches the native SDK.
   const moEInitConfig = new MoEInitConfig(
     MoEPushConfig.defaultConfig(),
     new MoEngageLogConfig(MoEngageLogLevel.VERBOSE, true),
   );
   ReactMoE.initialize(settings?.moengage_app_id, moEInitConfig);
+  log('MoEngage: JS initialize done; workspace env is native file-based TEST');
   ReactMoE.showInApp();
   ReactMoE.showNudge();
   ReactMoE.enableAdIdTracking();
